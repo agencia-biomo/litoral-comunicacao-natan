@@ -1,0 +1,180 @@
+@import "tailwindcss";
+
+:root {
+  /* Cores CMYK - Primárias */
+  --cyan: #00D4FF;
+  --cyan-light: #7EE8FA;
+  --cyan-dark: #0099CC;
+
+  --magenta: #FF00FF;
+  --magenta-light: #FF66FF;
+  --magenta-dark: #CC00CC;
+
+  --yellow: #FFEB00;
+  --yellow-light: #FFF59D;
+  --yellow-dark: #FFD600;
+
+  --black: #1A1A1A;
+  --black-light: #333333;
+  --black-pure: #000000;
+
+  /* Neutras */
+  --white: #FFFFFF;
+  --gray-50: #FAFAFA;
+  --gray-100: #F5F5F5;
+  --gray-200: #EEEEEE;
+  --gray-300: #E0E0E0;
+  --gray-400: #BDBDBD;
+  --gray-500: #9E9E9E;
+  --gray-600: #757575;
+  --gray-700: #616161;
+  --gray-800: #424242;
+  --gray-900: #212121;
+
+  --background: #ffffff;
+  --foreground: #1A1A1A;
+}
+
+@theme inline {
+  /* Cores CMYK */
+  --color-cmyk-cyan: var(--cyan);
+  --color-cmyk-cyan-light: var(--cyan-light);
+  --color-cmyk-cyan-dark: var(--cyan-dark);
+
+  --color-cmyk-magenta: var(--magenta);
+  --color-cmyk-magenta-light: var(--magenta-light);
+  --color-cmyk-magenta-dark: var(--magenta-dark);
+
+  --color-cmyk-yellow: var(--yellow);
+  --color-cmyk-yellow-light: var(--yellow-light);
+  --color-cmyk-yellow-dark: var(--yellow-dark);
+
+  --color-cmyk-black: var(--black);
+  --color-cmyk-black-light: var(--black-light);
+  --color-cmyk-black-pure: var(--black-pure);
+
+  /* Cores base */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  /* Fonts */
+  --font-heading: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+/* Dark mode - desabilitado para este projeto */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #ffffff;
+    --foreground: #1A1A1A;
+  }
+}
+
+/* Base styles */
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body, 'Inter', sans-serif);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading, 'Space Grotesk', sans-serif);
+}
+
+/* Gradientes CMYK */
+.gradient-cmyk {
+  background: linear-gradient(135deg, var(--cyan), var(--magenta), var(--yellow));
+}
+
+.gradient-cmyk-soft {
+  background: linear-gradient(135deg,
+    rgba(0,212,255,0.1),
+    rgba(255,0,255,0.1),
+    rgba(255,235,0,0.1)
+  );
+}
+
+/* Animações */
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes pulse-slow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.animate-gradient-shift {
+  background-size: 200% 200%;
+  animation: gradient-shift 3s ease infinite;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 4s ease-in-out infinite;
+}
+
+/* Halftone pattern */
+.halftone-pattern {
+  background-image: radial-gradient(circle, var(--cyan) 1px, transparent 1px);
+  background-size: 10px 10px;
+}
+
+.halftone-pattern-magenta {
+  background-image: radial-gradient(circle, var(--magenta) 1px, transparent 1px);
+  background-size: 10px 10px;
+}
+
+.halftone-pattern-yellow {
+  background-image: radial-gradient(circle, var(--yellow) 1px, transparent 1px);
+  background-size: 10px 10px;
+}
+
+/* Cut line */
+.cut-line {
+  border: 2px dashed #ccc;
+  position: relative;
+}
+
+.cut-line::before {
+  content: '✂';
+  position: absolute;
+  top: -12px;
+  left: 20px;
+  font-size: 16px;
+  color: #999;
+}
+
+/* Overprint effect */
+.overprint-text {
+  position: relative;
+}
+
+.overprint-text::before {
+  content: attr(data-text);
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  color: var(--cyan);
+  mix-blend-mode: multiply;
+  opacity: 0.7;
+}
+
+.overprint-text::after {
+  content: attr(data-text);
+  position: absolute;
+  left: -2px;
+  top: -2px;
+  color: var(--magenta);
+  mix-blend-mode: multiply;
+  opacity: 0.7;
+}
