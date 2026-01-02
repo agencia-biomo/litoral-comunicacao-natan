@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, Inter } from "next/font/google";
-import { Header, Footer, WhatsAppButton } from "@/components/layout";
+import { Header, Footer, WhatsAppButton, PrintFrame } from "@/components/layout";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -88,10 +88,12 @@ export default function RootLayout({
       <body
         className={`${spaceGrotesk.variable} ${inter.variable} font-body antialiased bg-white text-[#1A1A1A]`}
       >
-        <Header />
-        <main>{children}</main>
-        <Footer />
-        <WhatsAppButton />
+        <PrintFrame>
+          <Header />
+          <main>{children}</main>
+          <Footer />
+          <WhatsAppButton />
+        </PrintFrame>
       </body>
     </html>
   );

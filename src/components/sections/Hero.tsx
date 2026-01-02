@@ -1,105 +1,176 @@
 'use client';
 
 import Link from 'next/link';
-import { CropMarks, CMYKGradientOverlay, RegistrationMark, CMYKColorBar } from '../graphics';
+import { RegistrationMark, CMYKColorBar } from '../graphics';
 
-interface StatProps {
-  value: string;
-  label: string;
-  color: 'cyan' | 'magenta' | 'yellow' | 'black';
+// Animated CMYK Logo Component
+function AnimatedCMYKLogo({ className = '' }: { className?: string }) {
+  return (
+    <div className={`relative ${className}`}>
+      {/* Subtle glow */}
+      <div className="absolute inset-0 blur-3xl opacity-20">
+        <div className="absolute inset-0 bg-gradient-to-tr from-[#00D4FF] via-[#FF00FF] to-[#FFEB00] rounded-full" />
+      </div>
+
+      {/* Main Logo SVG */}
+      <svg viewBox="0 0 200 200" className="w-full h-full relative z-10">
+        <defs>
+          <filter id="glow">
+            <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+            <feMerge>
+              <feMergeNode in="coloredBlur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+        </defs>
+
+        {/* Cyan segment */}
+        <path
+          d="M 100 30 A 70 70 0 0 1 170 100 L 130 100 A 30 30 0 0 0 100 70 Z"
+          fill="#00D4FF"
+          filter="url(#glow)"
+        >
+          <animateTransform
+            attributeName="transform"
+            type="rotate"
+            from="0 100 100"
+            to="360 100 100"
+            dur="20s"
+            repeatCount="indefinite"
+          />
+        </path>
+
+        {/* Yellow segment */}
+        <path
+          d="M 170 100 A 70 70 0 0 1 100 170 L 100 130 A 30 30 0 0 0 130 100 Z"
+          fill="#FFEB00"
+          filter="url(#glow)"
+        >
+          <animateTransform
+            attributeName="transform"
+            type="rotate"
+            from="0 100 100"
+            to="360 100 100"
+            dur="20s"
+            repeatCount="indefinite"
+          />
+        </path>
+
+        {/* Magenta segment */}
+        <path
+          d="M 100 170 A 70 70 0 0 1 30 100 L 70 100 A 30 30 0 0 0 100 130 Z"
+          fill="#FF00FF"
+          filter="url(#glow)"
+        >
+          <animateTransform
+            attributeName="transform"
+            type="rotate"
+            from="0 100 100"
+            to="360 100 100"
+            dur="20s"
+            repeatCount="indefinite"
+          />
+        </path>
+
+        {/* Black segment */}
+        <path
+          d="M 30 100 A 70 70 0 0 1 100 30 L 100 70 A 30 30 0 0 0 70 100 Z"
+          fill="#1A1A1A"
+          filter="url(#glow)"
+        >
+          <animateTransform
+            attributeName="transform"
+            type="rotate"
+            from="0 100 100"
+            to="360 100 100"
+            dur="20s"
+            repeatCount="indefinite"
+          />
+        </path>
+      </svg>
+    </div>
+  );
 }
 
-function Stat({ value, label, color }: StatProps) {
-  const colorMap = {
-    cyan: 'border-[#00D4FF]',
-    magenta: 'border-[#FF00FF]',
-    yellow: 'border-[#FFEB00]',
-    black: 'border-[#1A1A1A]',
+// Stat item
+function Stat({ value, label, color }: { value: string; label: string; color: string }) {
+  const borderColors: Record<string, string> = {
+    cyan: 'border-l-[#00D4FF]',
+    magenta: 'border-l-[#FF00FF]',
+    yellow: 'border-l-[#FFEB00]',
+    black: 'border-l-[#1A1A1A]',
   };
 
   return (
-    <div className={`text-center p-4 border-l-4 ${colorMap[color]} bg-white/80 backdrop-blur-sm rounded-r-lg shadow-sm`}>
-      <div className="flex items-center justify-center gap-1 mb-1">
-        <RegistrationMark size={12} color="#9CA3AF" />
-        <span className="text-2xl lg:text-3xl font-bold text-[#1A1A1A]">{value}</span>
-      </div>
-      <span className="text-xs lg:text-sm text-gray-600 uppercase tracking-wider">{label}</span>
+    <div className={`border-l-2 ${borderColors[color]} pl-4`}>
+      <div className="text-2xl lg:text-3xl font-bold text-[#1A1A1A]">{value}</div>
+      <div className="text-xs text-gray-500 uppercase tracking-wider">{label}</div>
     </div>
   );
 }
 
 export function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-white to-gray-100" />
-
-      {/* CMYK Gradient Overlay */}
-      <CMYKGradientOverlay />
-
-      {/* Halftone Pattern - subtle */}
+    <section className="relative min-h-screen flex items-center bg-[#FAFAFA] overflow-hidden">
+      {/* Subtle background pattern */}
       <div
-        className="absolute inset-0 opacity-[0.03]"
+        className="absolute inset-0 opacity-[0.015]"
         style={{
-          backgroundImage: `radial-gradient(circle, #00D4FF 1px, transparent 1px)`,
-          backgroundSize: '20px 20px',
+          backgroundImage: `radial-gradient(#1A1A1A 1px, transparent 1px)`,
+          backgroundSize: '24px 24px',
         }}
       />
 
       {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Left - Text Content */}
-          <div>
-            <CropMarks className="inline-block mb-8">
-              <span className="px-4 py-2 bg-white border border-gray-200 rounded-full text-sm font-medium text-gray-600">
-                <span className="inline-flex gap-1 mr-2">
-                  <span className="w-2 h-2 rounded-full bg-[#00D4FF]" />
-                  <span className="w-2 h-2 rounded-full bg-[#FF00FF]" />
-                  <span className="w-2 h-2 rounded-full bg-[#FFEB00]" />
-                  <span className="w-2 h-2 rounded-full bg-[#1A1A1A]" />
-                </span>
-                Desde 2011 em Balneário Camboriú
-              </span>
-            </CropMarks>
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
+        <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-              <span className="text-[#1A1A1A]">Comunicação</span>
+          {/* Left - Text */}
+          <div className="order-2 lg:order-1">
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-white border border-gray-200 rounded-full text-xs text-gray-500 mb-8">
+              <span className="flex gap-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#00D4FF]" />
+                <span className="w-1.5 h-1.5 rounded-full bg-[#FF00FF]" />
+                <span className="w-1.5 h-1.5 rounded-full bg-[#FFEB00]" />
+                <span className="w-1.5 h-1.5 rounded-full bg-[#1A1A1A]" />
+              </span>
+              Desde 2011 em Balneário Camboriú
+            </div>
+
+            {/* Heading */}
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] mb-6">
+              <span className="text-[#1A1A1A]">A Arte da</span>
               <br />
-              <span className="text-[#1A1A1A]">Visual que</span>
-              <br />
-              <span
-                className="bg-gradient-to-r from-[#00D4FF] via-[#FF00FF] to-[#FFEB00] bg-clip-text text-transparent"
-                style={{ backgroundSize: '200% 200%' }}
-              >
-                Transforma
+              <span className="bg-gradient-to-r from-[#00D4FF] via-[#FF00FF] to-[#FFEB00] bg-clip-text text-transparent">
+                Impressão
               </span>
             </h1>
 
-            <p className="text-lg lg:text-xl text-gray-600 mb-8 max-w-lg">
-              Especialistas em fachadas, letras caixa, envelopamento veicular e muito mais.
-              Transformamos sua marca em referência visual.
+            {/* Description */}
+            <p className="text-lg text-gray-600 mb-8 max-w-md">
+              Especialistas em fachadas ACM, letras caixa, envelopamento veicular
+              e comunicação visual completa.
             </p>
 
             {/* CTAs */}
-            <div className="flex flex-col sm:flex-row gap-4 mb-12">
+            <div className="flex flex-wrap gap-4 mb-12">
               <Link
                 href="/portfolio"
-                className="px-8 py-4 bg-[#1A1A1A] text-white font-bold rounded-full hover:bg-gray-800 transition-colors text-center"
+                className="px-6 py-3 bg-[#1A1A1A] text-white font-medium rounded-full hover:bg-gray-800 transition-colors"
               >
                 Ver Portfólio
               </Link>
               <Link
                 href="/contato"
-                className="px-8 py-4 bg-gradient-to-r from-[#00D4FF] via-[#FF00FF] to-[#FFEB00] text-black font-bold rounded-full hover:shadow-xl hover:scale-105 transition-all duration-300 text-center animate-gradient-shift"
-                style={{ backgroundSize: '200% 200%' }}
+                className="px-6 py-3 border-2 border-[#1A1A1A] text-[#1A1A1A] font-medium rounded-full hover:bg-[#1A1A1A] hover:text-white transition-colors"
               >
                 Orçamento Grátis
               </Link>
             </div>
 
             {/* Stats */}
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="flex flex-wrap gap-8">
               <Stat value="14+" label="Anos" color="cyan" />
               <Stat value="500+" label="Projetos" color="magenta" />
               <Stat value="200+" label="Clientes" color="yellow" />
@@ -107,68 +178,53 @@ export function Hero() {
             </div>
           </div>
 
-          {/* Right - Visual Element */}
-          <div className="relative hidden lg:block">
-            <CropMarks size="lg" className="p-8">
-              {/* Placeholder for hero image/visual */}
-              <div className="relative aspect-square bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl overflow-hidden">
-                {/* CMYK Circles Animation */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="relative w-64 h-64">
-                    {/* Cyan circle */}
-                    <div
-                      className="absolute w-32 h-32 rounded-full bg-[#00D4FF]/30 blur-xl animate-float"
-                      style={{ top: '0', left: '20%', animationDelay: '0s' }}
-                    />
-                    {/* Magenta circle */}
-                    <div
-                      className="absolute w-40 h-40 rounded-full bg-[#FF00FF]/30 blur-xl animate-float"
-                      style={{ bottom: '10%', right: '10%', animationDelay: '1s' }}
-                    />
-                    {/* Yellow circle */}
-                    <div
-                      className="absolute w-28 h-28 rounded-full bg-[#FFEB00]/30 blur-xl animate-float"
-                      style={{ bottom: '0', left: '10%', animationDelay: '2s' }}
-                    />
-                  </div>
-                </div>
+          {/* Right - Logo */}
+          <div className="order-1 lg:order-2 flex justify-center">
+            <div className="relative">
+              {/* Registration marks nos cantos */}
+              <RegistrationMark size={16} color="#E5E5E5" className="absolute -top-8 -left-8" />
+              <RegistrationMark size={16} color="#E5E5E5" className="absolute -top-8 -right-8" />
+              <RegistrationMark size={16} color="#E5E5E5" className="absolute -bottom-8 -left-8" />
+              <RegistrationMark size={16} color="#E5E5E5" className="absolute -bottom-8 -right-8" />
 
-                {/* Center content */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="w-24 h-24 mx-auto mb-4">
-                      <svg viewBox="0 0 100 100" className="w-full h-full">
-                        <path d="M 50 10 A 40 40 0 0 1 90 50" fill="none" stroke="#00D4FF" strokeWidth="8" strokeLinecap="round" />
-                        <path d="M 90 50 A 40 40 0 0 1 50 90" fill="none" stroke="#FF00FF" strokeWidth="8" strokeLinecap="round" />
-                        <path d="M 50 90 A 40 40 0 0 1 10 50" fill="none" stroke="#FFEB00" strokeWidth="8" strokeLinecap="round" />
-                        <path d="M 10 50 A 40 40 0 0 1 50 10" fill="none" stroke="#1A1A1A" strokeWidth="8" strokeLinecap="round" />
-                      </svg>
-                    </div>
-                    <p className="text-sm text-gray-500 font-mono">
-                      A arte da impressão
-                    </p>
-                  </div>
-                </div>
+              {/* Crop marks sutis */}
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-px h-3 bg-gray-300" />
+              <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-px h-3 bg-gray-300" />
+              <div className="absolute top-1/2 -left-4 -translate-y-1/2 h-px w-3 bg-gray-300" />
+              <div className="absolute top-1/2 -right-4 -translate-y-1/2 h-px w-3 bg-gray-300" />
 
-                {/* Registration marks in corners */}
-                <RegistrationMark size={20} color="#BDBDBD" className="absolute top-4 left-4" />
-                <RegistrationMark size={20} color="#BDBDBD" className="absolute top-4 right-4" />
-                <RegistrationMark size={20} color="#BDBDBD" className="absolute bottom-4 left-4" />
-                <RegistrationMark size={20} color="#BDBDBD" className="absolute bottom-4 right-4" />
+              {/* Logo */}
+              <AnimatedCMYKLogo className="w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96" />
+
+              {/* Brand name */}
+              <div className="text-center mt-6">
+                <h2 className="text-2xl lg:text-3xl font-bold tracking-tight text-[#1A1A1A]">
+                  LITORAL
+                </h2>
+                <p className="text-xs text-gray-400 tracking-[0.25em] uppercase">
+                  Comunicação Visual
+                </p>
               </div>
-            </CropMarks>
-
-            {/* Color bar below */}
-            <div className="mt-4 px-8">
-              <CMYKColorBar variant="full" height="h-2" className="rounded-full overflow-hidden" />
             </div>
           </div>
         </div>
       </div>
 
-      {/* Bottom Color Bar */}
+      {/* Bottom color bar - sutil */}
       <div className="absolute bottom-0 left-0 right-0">
         <CMYKColorBar variant="compact" height="h-1" />
+      </div>
+
+      {/* Print info - discreto */}
+      <div className="absolute bottom-6 left-6 hidden lg:flex items-center gap-3 text-[10px] font-mono text-gray-300">
+        <RegistrationMark size={10} color="#D4D4D4" />
+        <span>LITORAL-2026</span>
+        <span>•</span>
+        <span>CMYK</span>
+      </div>
+
+      <div className="absolute bottom-6 right-6 hidden lg:block text-[10px] font-mono text-gray-300">
+        300 DPI • FOGRA39
       </div>
     </section>
   );

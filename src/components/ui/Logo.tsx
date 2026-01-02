@@ -3,25 +3,17 @@
 interface LogoProps {
   variant?: 'full' | 'icon';
   className?: string;
-  size?: 'sm' | 'md' | 'lg';
+  size?: number;
 }
 
-export function Logo({ variant = 'full', className = '', size = 'md' }: LogoProps) {
-  const sizeMap = {
-    sm: { circle: 32, text: 'text-lg' },
-    md: { circle: 40, text: 'text-xl' },
-    lg: { circle: 56, text: 'text-2xl' }
-  };
-
-  const { circle, text } = sizeMap[size];
-
+export function Logo({ variant = 'full', className = '', size = 40 }: LogoProps) {
   return (
     <div className={`flex items-center gap-3 ${className}`}>
       {/* CMYK Circle Logo */}
       <div className="relative group">
         <svg
-          width={circle}
-          height={circle}
+          width={size}
+          height={size}
           viewBox="0 0 100 100"
           className="transition-transform duration-500 group-hover:rotate-180"
         >
@@ -63,10 +55,10 @@ export function Logo({ variant = 'full', className = '', size = 'md' }: LogoProp
       {/* Text */}
       {variant === 'full' && (
         <div className="flex flex-col">
-          <span className={`font-bold tracking-tight ${text}`} style={{ fontFamily: 'var(--font-heading)' }}>
+          <span className="font-bold tracking-tight text-xl text-[#1A1A1A]">
             LITORAL
           </span>
-          <span className="text-xs text-gray-500 tracking-widest uppercase">
+          <span className="text-[10px] text-gray-400 tracking-widest uppercase">
             Comunicação Visual
           </span>
         </div>

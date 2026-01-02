@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import { CropMarks, RegistrationMark, CMYKColorBar } from '../graphics';
 
 interface ServiceCardProps {
   title: string;
@@ -13,63 +12,30 @@ interface ServiceCardProps {
 
 function ServiceCard({ title, description, href, color, icon }: ServiceCardProps) {
   const colorMap = {
-    cyan: {
-      border: 'border-l-[#00D4FF]',
-      bg: 'hover:bg-[#00D4FF]/5',
-      shadow: 'hover:shadow-[#00D4FF]/20',
-      bar: 'bg-[#00D4FF]',
-    },
-    magenta: {
-      border: 'border-l-[#FF00FF]',
-      bg: 'hover:bg-[#FF00FF]/5',
-      shadow: 'hover:shadow-[#FF00FF]/20',
-      bar: 'bg-[#FF00FF]',
-    },
-    yellow: {
-      border: 'border-l-[#FFEB00]',
-      bg: 'hover:bg-[#FFEB00]/5',
-      shadow: 'hover:shadow-[#FFEB00]/20',
-      bar: 'bg-[#FFEB00]',
-    },
-    black: {
-      border: 'border-l-[#1A1A1A]',
-      bg: 'hover:bg-gray-50',
-      shadow: 'hover:shadow-gray-200/50',
-      bar: 'bg-[#1A1A1A]',
-    },
+    cyan: 'border-l-[#00D4FF]',
+    magenta: 'border-l-[#FF00FF]',
+    yellow: 'border-l-[#FFEB00]',
+    black: 'border-l-[#1A1A1A]',
   };
 
-  const styles = colorMap[color];
-
   return (
-    <Link href={href} className="block group">
-      <div className={`relative bg-white border-l-4 ${styles.border} rounded-r-xl p-6 shadow-md ${styles.bg} ${styles.shadow} hover:shadow-xl transition-all duration-300 hover:-translate-y-1`}>
-        {/* Registration mark */}
-        <RegistrationMark size={16} color="#E0E0E0" className="absolute top-3 right-3" />
-
-        {/* Icon */}
-        <div className="w-12 h-12 mb-4 text-gray-700 group-hover:scale-110 transition-transform duration-300">
+    <Link href={href} className="group">
+      <div className={`bg-white border-l-2 ${colorMap[color]} p-6 hover:shadow-lg transition-all duration-300`}>
+        <div className="w-10 h-10 mb-4 text-gray-400 group-hover:text-[#1A1A1A] transition-colors">
           {icon}
         </div>
-
-        {/* Content */}
-        <h3 className="text-lg font-bold text-[#1A1A1A] mb-2 group-hover:text-gray-800">
+        <h3 className="text-lg font-semibold text-[#1A1A1A] mb-2">
           {title}
         </h3>
-        <p className="text-sm text-gray-600 mb-4 line-clamp-2">
+        <p className="text-sm text-gray-500 mb-4">
           {description}
         </p>
-
-        {/* Link indicator */}
-        <span className="inline-flex items-center text-sm font-medium text-gray-500 group-hover:text-[#1A1A1A] transition-colors">
+        <span className="text-sm font-medium text-gray-400 group-hover:text-[#1A1A1A] transition-colors inline-flex items-center gap-1">
           Saiba mais
-          <svg className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
           </svg>
         </span>
-
-        {/* Color bar */}
-        <div className={`absolute bottom-0 left-0 right-0 h-1 ${styles.bar} rounded-b-xl opacity-50 group-hover:opacity-100 transition-opacity`} />
       </div>
     </Link>
   );
@@ -78,7 +44,7 @@ function ServiceCard({ title, description, href, color, icon }: ServiceCardProps
 const services: ServiceCardProps[] = [
   {
     title: 'Fachadas em ACM',
-    description: 'Fachadas modernas e duráveis em alumínio composto com instalação profissional.',
+    description: 'Fachadas modernas e duráveis em alumínio composto.',
     href: '/servicos/fachadas-acm',
     color: 'cyan',
     icon: (
@@ -89,7 +55,7 @@ const services: ServiceCardProps[] = [
   },
   {
     title: 'Letras Caixa',
-    description: 'Letras em acrílico, metal e PVC iluminadas ou não para destaque da sua marca.',
+    description: 'Letras em acrílico, metal e PVC iluminadas ou não.',
     href: '/servicos/letras-caixa',
     color: 'magenta',
     icon: (
@@ -100,7 +66,7 @@ const services: ServiceCardProps[] = [
   },
   {
     title: 'Envelopamento Veicular',
-    description: 'Transforme seu veículo em mídia móvel com adesivos de alta qualidade.',
+    description: 'Transforme seu veículo em mídia móvel.',
     href: '/servicos/envelopamento-veicular',
     color: 'yellow',
     icon: (
@@ -111,7 +77,7 @@ const services: ServiceCardProps[] = [
   },
   {
     title: 'Adesivos & Vitrines',
-    description: 'Adesivos perfurados, jateados e decorativos para vitrines e ambientes.',
+    description: 'Adesivos perfurados, jateados e decorativos.',
     href: '/servicos/adesivos-vitrines',
     color: 'black',
     icon: (
@@ -122,7 +88,7 @@ const services: ServiceCardProps[] = [
   },
   {
     title: 'Outdoors & Painéis',
-    description: 'Impressão de lona e painéis para outdoors e grandes formatos.',
+    description: 'Impressão de lona e painéis para grandes formatos.',
     href: '/servicos/outdoors-paineis',
     color: 'cyan',
     icon: (
@@ -133,7 +99,7 @@ const services: ServiceCardProps[] = [
   },
   {
     title: 'Tapumes',
-    description: 'Tapumes personalizados para obras com impressão de alta qualidade.',
+    description: 'Tapumes personalizados para obras.',
     href: '/servicos/tapumes',
     color: 'magenta',
     icon: (
@@ -146,43 +112,26 @@ const services: ServiceCardProps[] = [
 
 export function Services() {
   return (
-    <section className="py-20 lg:py-28 bg-gray-50 relative overflow-hidden">
-      {/* Subtle halftone pattern */}
-      <div
-        className="absolute inset-0 opacity-[0.02]"
-        style={{
-          backgroundImage: `radial-gradient(circle, #FF00FF 1px, transparent 1px)`,
-          backgroundSize: '30px 30px',
-        }}
-      />
-
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-20 lg:py-28 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-12 lg:mb-16">
-          <CropMarks size="sm" className="inline-block mb-6">
-            <span className="px-4 py-2 bg-white border border-gray-200 rounded-full text-sm font-medium text-gray-600 font-mono">
-              SERVIÇOS
-            </span>
-          </CropMarks>
-
+        <div className="max-w-2xl mb-12">
+          <p className="text-sm font-medium text-gray-400 uppercase tracking-wider mb-3">
+            Serviços
+          </p>
           <h2 className="text-3xl lg:text-4xl font-bold text-[#1A1A1A] mb-4">
-            Nossos Serviços
+            Soluções completas em comunicação visual
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Soluções completas em comunicação visual para transformar sua marca em referência no mercado.
+          <p className="text-gray-600">
+            Transformamos sua marca em referência no mercado com qualidade e tecnologia.
           </p>
         </div>
 
         {/* Services Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-gray-100">
           {services.map((service) => (
             <ServiceCard key={service.href} {...service} />
           ))}
-        </div>
-
-        {/* Color Bar */}
-        <div className="mt-12 lg:mt-16 max-w-2xl mx-auto">
-          <CMYKColorBar variant="full" height="h-2" className="rounded-full overflow-hidden" />
         </div>
       </div>
     </section>
