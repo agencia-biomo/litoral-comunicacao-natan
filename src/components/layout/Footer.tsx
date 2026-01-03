@@ -18,8 +18,12 @@ const links = [
 
 export function Footer() {
   return (
-    <footer className="bg-[#1A1A1A] text-white">
-      <CMYKColorBar variant="compact" height="h-1" />
+    <footer>
+      {/* White strip so black in CMYK bar is visible */}
+      <div className="bg-white h-2">
+        <CMYKColorBar variant="compact" height="h-2" />
+      </div>
+      <div className="bg-[#1A1A1A] text-white">
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
@@ -105,6 +109,7 @@ export function Footer() {
             </a>
           </p>
         </div>
+      </div>
       </div>
     </footer>
   );

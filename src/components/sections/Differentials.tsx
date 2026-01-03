@@ -33,14 +33,14 @@ const colorMap = {
   cyan: 'text-[#00D4FF]',
   magenta: 'text-[#FF00FF]',
   yellow: 'text-[#FFEB00]',
-  black: 'text-[#1A1A1A]',
+  black: 'text-white',
 };
 
 const borderColorMap = {
   cyan: 'border-[#00D4FF]',
   magenta: 'border-[#FF00FF]',
   yellow: 'border-[#FFEB00]',
-  black: 'border-[#1A1A1A]',
+  black: 'border-white',
 };
 
 export function Differentials() {
