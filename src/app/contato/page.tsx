@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { RegistrationMark, CMYKColorBar } from '@/components/graphics';
+import { RegistrationMark } from '@/components/graphics';
 
 const services = [
   'Fachadas em ACM',
@@ -397,8 +397,6 @@ export default function ContatoPage() {
           referrerPolicy="no-referrer-when-downgrade"
         />
       </section>
-
-      <CMYKColorBar variant="compact" height="h-2" />
     </main>
   );
 }

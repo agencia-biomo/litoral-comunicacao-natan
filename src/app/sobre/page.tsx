@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { RegistrationMark, CMYKColorBar } from '@/components/graphics';
+import { RegistrationMark } from '@/components/graphics';
 
 const timeline = [
   { year: '2011', title: 'Fundação', description: 'Iniciamos nossas atividades em Balneário Camboriú com foco em comunicação visual.' },
@@ -233,7 +233,6 @@ export default function SobrePage() {
           </div>
         </div>
       </section>
-      <CMYKColorBar variant="compact" height="h-2" />
     </main>
   );
 }

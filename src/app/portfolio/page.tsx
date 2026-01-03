@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { RegistrationMark, CMYKColorBar } from '@/components/graphics';
+import { RegistrationMark } from '@/components/graphics';
 
 const categories = [
   { id: 'all', name: 'Todos', color: 'black' },
@@ -158,7 +158,6 @@ export default function PortfolioPage() {
           </Link>
         </div>
       </section>
-      <CMYKColorBar variant="compact" height="h-2" />
 
       {/* Lightbox Modal */}
       {selectedProject && (
