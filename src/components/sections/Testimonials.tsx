@@ -65,7 +65,7 @@ export function Testimonials() {
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
-              className={`bg-[#FAFAFA] border-l-2 ${colorMap[testimonial.color as keyof typeof colorMap]} p-8`}
+              className={`bg-[#F8FAFC] border-l-2 ${colorMap[testimonial.color as keyof typeof colorMap]} p-8`}
             >
               {/* Quote */}
               <div className="mb-6">

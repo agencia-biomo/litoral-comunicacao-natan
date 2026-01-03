@@ -47,7 +47,7 @@ export default function PortfolioPage() {
   return (
     <main className="min-h-screen bg-white pt-20">
       {/* Header */}
-      <section className="py-16 lg:py-24 bg-[#FAFAFA]">
+      <section className="py-16 lg:py-24 bg-[#F8FAFC]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Breadcrumb */}
           <nav className="flex items-center gap-2 text-sm text-gray-500 mb-8">

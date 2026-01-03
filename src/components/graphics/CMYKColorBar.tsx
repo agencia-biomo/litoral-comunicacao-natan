@@ -34,10 +34,10 @@ export function CMYKColorBar({
   ];
 
   const blackShades = [
-    'bg-[#F5F5F5]',
-    'bg-[#E0E0E0]',
-    'bg-[#9E9E9E]',
-    'bg-[#616161]',
+    'bg-[#D4D4D4]',
+    'bg-[#A3A3A3]',
+    'bg-[#737373]',
+    'bg-[#404040]',
     'bg-[#1A1A1A]'
   ];
 

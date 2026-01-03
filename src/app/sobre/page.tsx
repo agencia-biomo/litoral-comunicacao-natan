@@ -28,7 +28,7 @@ export default function SobrePage() {
   return (
     <main className="min-h-screen bg-white pt-20">
       {/* Header */}
-      <section className="py-16 lg:py-24 bg-[#FAFAFA]">
+      <section className="py-16 lg:py-24 bg-[#F8FAFC]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Breadcrumb */}
           <nav className="flex items-center gap-2 text-sm text-gray-500 mb-8">
@@ -132,7 +132,7 @@ export default function SobrePage() {
       </section>
 
       {/* Timeline */}
-      <section className="py-16 lg:py-24 bg-[#FAFAFA]">
+      <section className="py-16 lg:py-24 bg-[#F8FAFC]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold text-[#1A1A1A] mb-4">

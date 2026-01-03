@@ -54,7 +54,7 @@ const iconMap: Record<string, React.ReactNode> = {
 
 export default function ServicosPage() {
   return (
-    <main className="min-h-screen bg-[#FAFAFA]">
+    <main className="min-h-screen bg-[#F8FAFC]">
       {/* Hero */}
       <section className="relative py-20 lg:py-28 bg-white overflow-hidden">
         {/* Subtle pattern */}
