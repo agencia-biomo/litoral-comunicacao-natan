@@ -157,8 +157,8 @@ export default function PortfolioPage() {
             </svg>
           </Link>
         </div>
-        <CMYKColorBar variant="compact" height="h-1" className="mt-16" />
       </section>
+      <CMYKColorBar variant="compact" height="h-2" />
 
       {/* Lightbox Modal */}
       {selectedProject && (

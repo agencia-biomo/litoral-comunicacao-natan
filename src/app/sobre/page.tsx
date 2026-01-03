@@ -232,8 +232,8 @@ export default function SobrePage() {
             </Link>
           </div>
         </div>
-        <CMYKColorBar variant="compact" height="h-1" className="mt-16" />
       </section>
+      <CMYKColorBar variant="compact" height="h-2" />
     </main>
   );
 }

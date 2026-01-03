@@ -22,24 +22,18 @@ function StarRating({ rating = 5 }: { rating?: number }) {
   );
 }
 
-// Stat badge component
+// Stat badge component - minimal with colored left border
 function StatBadge({ value, label, color }: { value: string; label: string; color: string }) {
-  const bgColors: Record<string, string> = {
-    cyan: 'bg-[#00D4FF]/10 border-[#00D4FF]/20',
-    magenta: 'bg-[#FF00FF]/10 border-[#FF00FF]/20',
-    yellow: 'bg-[#FFEB00]/10 border-[#FFEB00]/20',
-    black: 'bg-[#1A1A1A]/10 border-[#1A1A1A]/20',
-  };
-  const textColors: Record<string, string> = {
-    cyan: 'text-[#00A8CC]',
-    magenta: 'text-[#CC00CC]',
-    yellow: 'text-[#B8A600]',
-    black: 'text-[#1A1A1A]',
+  const borderColors: Record<string, string> = {
+    cyan: 'border-l-[#00D4FF]',
+    magenta: 'border-l-[#FF00FF]',
+    yellow: 'border-l-[#FFEB00]',
+    black: 'border-l-[#1A1A1A]',
   };
 
   return (
-    <div className={`px-4 py-3 rounded-xl border ${bgColors[color]} backdrop-blur-sm`}>
-      <div className={`text-2xl lg:text-3xl font-bold ${textColors[color]}`}>{value}</div>
+    <div className={`pl-4 border-l-4 ${borderColors[color]}`}>
+      <div className="text-2xl lg:text-3xl font-bold text-[#1A1A1A]">{value}</div>
       <div className="text-xs text-gray-500 uppercase tracking-wider">{label}</div>
     </div>
   );
@@ -51,8 +45,8 @@ export function Hero() {
       {/* Background Image with Overlay */}
       <div className="absolute inset-0">
         <Image
-          src="/images/placeholder/hero-1.jpg"
-          alt="Fachada comercial moderna"
+          src="/images/placeholder/hero-bc.jpg"
+          alt="Vista aérea de Balneário Camboriú"
           fill
           className="object-cover"
           priority

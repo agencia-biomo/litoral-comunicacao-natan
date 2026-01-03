@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { RegistrationMark, CMYKColorBar } from '../graphics';
 
 const portfolioItems = [
@@ -8,31 +9,37 @@ const portfolioItems = [
     title: 'Fachada Loja Fashion',
     category: 'Fachadas em ACM',
     color: 'cyan',
+    image: '/images/placeholder/fachada-1.jpg',
   },
   {
     title: 'Letras Caixa Clínica',
     category: 'Letras Caixa',
     color: 'magenta',
+    image: '/images/placeholder/loja-1.jpg',
   },
   {
     title: 'Envelopamento Van',
     category: 'Envelopamento',
     color: 'yellow',
+    image: '/images/placeholder/veiculo-1.jpg',
   },
   {
     title: 'Vitrine Restaurante',
     category: 'Adesivos',
     color: 'black',
+    image: '/images/placeholder/vitrine-1.jpg',
   },
   {
     title: 'Outdoor Campanha',
     category: 'Outdoors',
     color: 'cyan',
+    image: '/images/placeholder/outdoor-1.jpg',
   },
   {
     title: 'Fachada Farmácia',
     category: 'Fachadas em ACM',
     color: 'magenta',
+    image: '/images/placeholder/construcao-1.jpg',
   },
 ];
 
@@ -83,12 +90,13 @@ export function PortfolioPreview() {
               className="group block"
             >
               <div className="relative aspect-[4/3] bg-gray-100 rounded-lg overflow-hidden mb-4">
-                {/* Placeholder for image */}
-                <div className="absolute inset-0 flex items-center justify-center text-gray-300">
-                  <svg className="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                  </svg>
-                </div>
+                {/* Image */}
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                />
 
                 {/* Hover overlay */}
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors flex items-center justify-center">
